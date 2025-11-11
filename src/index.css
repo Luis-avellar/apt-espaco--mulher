@@ -1,31 +1,68 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
-	font-family: sans-serif;
+	font-family: 'Inter', sans-serif;
 	color: white;
 	background-color: #292929;
+	font-size: 62.5%;
 }
 
 .container {
-	text-align: center;
-}
-
-.count {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding: 8px 0;
+	background-color: #2a3c97;
 }
 
-button {
-	color: #292929;
-	background-color: white;
-	border-radius: 50%;
-	border: 0;
-	margin: 0 8px;
+.container-form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 5rem;
+	background-color: #373c65;
+	font-size: 1.2rem;
 }
 
-button:hover {
-	cursor: pointer;
+.container-form button {
+	padding: 10px 23px;
+	font-weight: bold;
+	color: white;
+	background-color: #e2586f;
+	border-radius: 8px;
+	border: none;
 }
 
-h2 {
-	margin: 20px;
+.container-form select {
+	padding: 10px 23px;
+	border: 1px solid #9199c0;
+	border-radius: 8px;
+	background-color: #9199c0;
+	color: white;
+	margin-left: 25px;
+}
+
+.container-form input {
+	padding: 10px 25px;
+	border-radius: 8px;
+	border: 1px solid #9199c0;
+	background-color: #9199c0;
+	margin: 0 7px;
+}
+
+.container-form input::placeholder {
+	color: white;
+}
+
+.container img {
+	padding-right: 18px;
+}
+
+.container h1 {
+	font-size: 5.6rem;
+	color: #e4b892;
 }
