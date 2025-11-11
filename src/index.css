@@ -11,6 +11,7 @@ body {
 	font-size: 62.5%;
 }
 
+/* NAV ESTILOS */
 .container {
 	display: flex;
 	justify-content: center;
@@ -65,4 +66,10 @@ body {
 .container h1 {
 	font-size: 5.6rem;
 	color: #e4b892;
+}
+
+/* SECTION ESTILOS */
+section {
+	height: 37rem;
+	background-color: #e4b892;
 }
