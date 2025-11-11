@@ -1,3 +1,5 @@
+import { FaXmark } from 'react-icons/fa6'
+
 const App = () => (
 	<>
 		<nav>
@@ -21,7 +23,21 @@ const App = () => (
 				</form>
 			</div>
 		</nav>
-		<section></section>
+
+		<section>
+			<div className='container-grid'>
+				<form className='grid'>
+					<label htmlFor='#'>
+						<div className='icon'>
+							<input type='checkbox' name='first' />4 Halteres
+							<FaXmark style={{ color: 'red' }} />
+						</div>
+					</label>
+				</form>
+			</div>
+			<div className='container-btn'></div>
+		</section>
+
 		<footer>
 			<div className='container-form'>
 				<p>Você tem 0 itens na lista</p>

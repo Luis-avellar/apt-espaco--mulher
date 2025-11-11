@@ -20,6 +20,15 @@ body {
 	background-color: #2a3c97;
 }
 
+.container img {
+	padding-right: 18px;
+}
+
+.container h1 {
+	font-size: 4.2rem;
+	color: #e4b892;
+}
+
 .container-form {
 	display: flex;
 	align-items: center;
@@ -59,17 +68,31 @@ body {
 	color: white;
 }
 
-.container img {
-	padding-right: 18px;
-}
-
-.container h1 {
-	font-size: 5.6rem;
-	color: #e4b892;
-}
-
 /* SECTION ESTILOS */
 section {
 	height: 39rem;
 	background-color: #e4b892;
+}
+.container-grid {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.3rem;
+}
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 20rem;
+	padding: 40px 10px;
+}
+.icon {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.icon input {
+	margin-right: 10px;
+}
+.icon svg {
+	margin-left: 15px;
 }
