@@ -35,7 +35,16 @@ const App = () => (
 					</label>
 				</form>
 			</div>
-			<div className='container-btn'></div>
+			<div className='container-btn'>
+				<form className='clear'>
+					<select name='opcoes'>
+						<option value='ordenar'>Ordenar pelo mais recentes</option>
+						<option value='guardados'>Mostrar só itens guardados</option>
+						<option value='ordem'>Ordem alfabética</option>
+					</select>
+					<button>Limpar lista</button>
+				</form>
+			</div>
 		</section>
 
 		<footer>
