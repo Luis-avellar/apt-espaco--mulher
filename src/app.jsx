@@ -4,6 +4,14 @@ import { useState } from 'react'
 const App = () => {
 	const [product, setProduct] = useState([])
 
+	const handleMarked = e => {
+		if (e.target.checked) {
+			e.target.nextSibling.style.textDecorationLine = 'line-through'
+			return
+		}
+		e.target.nextSibling.style.textDecorationLine = ''
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault()
 
@@ -48,7 +56,7 @@ const App = () => {
 						{product.map(product => {
 							return (
 								<div className='item' key={product.id}>
-									<input type='checkbox' name='first' />
+									<input type='checkbox' name='first' onClick={handleMarked} />
 									<span>{`${product.quantity} ${product.category}`}</span>
 									<FaXmark style={{ color: 'red' }} />
 								</div>
