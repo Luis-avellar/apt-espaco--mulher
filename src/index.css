@@ -80,21 +80,22 @@ section {
 	align-items: center;
 	font-size: 1.3rem;
 }
-.grid {
+.grid-item {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	column-gap: 20rem;
+	row-gap: 5rem;
 	padding: 40px 10px;
 }
-.icon {
+.item {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
-.icon input {
+.item input {
 	margin-right: 10px;
 }
-.icon svg {
+.item svg {
 	margin-left: 15px;
 }
 .container-btn {
