@@ -3,13 +3,10 @@ import { useState } from 'react'
 
 const App = () => {
 	const [product, setProduct] = useState([])
-
-	const handleMarked = e => {
-		if (e.target.checked) {
-			e.target.nextSibling.style.textDecorationLine = 'line-through'
-			return
-		}
-		e.target.nextSibling.style.textDecorationLine = ''
+	const [isChecked, setIsChecked] = useState(false)
+	// Manipula a classe do Span, baseando se no ckeckbox marcado
+	const handleCheckboxToggle = e => {
+		setIsChecked(e.target.checked)
 	}
 
 	const handleSubmit = e => {
@@ -56,8 +53,14 @@ const App = () => {
 						{product.map(product => {
 							return (
 								<div className='item' key={product.id}>
-									<input type='checkbox' name='first' onClick={handleMarked} />
-									<span>{`${product.quantity} ${product.category}`}</span>
+									<input
+										type='checkbox'
+										name='first'
+										onChange={handleCheckboxToggle}
+									/>
+									<span
+										className={isChecked ? 'line-through' : ''}
+									>{`${product.quantity} ${product.category}`}</span>
 									<FaXmark style={{ color: 'red' }} />
 								</div>
 							)

@@ -119,3 +119,6 @@ section {
 	background-color: #9199c0;
 	color: white;
 }
+.line-through {
+	text-decoration: line-through;
+}
