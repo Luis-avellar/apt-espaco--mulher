@@ -28,6 +28,11 @@ const App = () => {
 	const handleRemoveItem = id => {
 		setProduct(product.filter(item => item.id !== id))
 	}
+	// Substitui o valor do estado por um arr vazio, limpando a lista.
+	const handleRemoveAllItens = e => {
+		e.preventDefault()
+		setProduct([])
+	}
 
 	return (
 		<>
@@ -80,7 +85,7 @@ const App = () => {
 							<option value='guardados'>Mostrar só itens guardados</option>
 							<option value='ordem'>Ordem alfabética</option>
 						</select>
-						<button>Limpar lista</button>
+						<button onClick={handleRemoveAllItens}>Limpar lista</button>
 					</form>
 				</div>
 			</section>
