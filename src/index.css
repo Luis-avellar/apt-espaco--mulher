@@ -122,3 +122,6 @@ section {
 .line-through {
 	text-decoration: line-through;
 }
+svg {
+	color: red;
+}

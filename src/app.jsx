@@ -4,11 +4,12 @@ import { useState } from 'react'
 const App = () => {
 	const [product, setProduct] = useState([])
 	const [isChecked, setIsChecked] = useState(false)
-	// Manipula a classe do Span, baseando se no ckeckbox marcado
+
+	// Manipula o estado atra´ves do InputCheckBox
 	const handleCheckboxToggle = e => {
 		setIsChecked(e.target.checked)
 	}
-
+	// Atualiza o estado product com a informações obtidas no form Adicionar
 	const handleSubmit = e => {
 		e.preventDefault()
 
@@ -21,6 +22,11 @@ const App = () => {
 		}
 
 		setProduct(prev => [...prev, newProduct])
+		e.target.reset()
+	}
+	// Remove e atualiza a lista de product baseado no id do item clicado
+	const handleRemoveItem = id => {
+		setProduct(product.filter(item => item.id !== id))
 	}
 
 	return (
@@ -61,7 +67,7 @@ const App = () => {
 									<span
 										className={isChecked ? 'line-through' : ''}
 									>{`${product.quantity} ${product.category}`}</span>
-									<FaXmark style={{ color: 'red' }} />
+									<FaXmark onClick={() => handleRemoveItem(product.id)} />
 								</div>
 							)
 						})}
