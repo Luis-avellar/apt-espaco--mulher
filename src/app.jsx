@@ -25,6 +25,7 @@ const App = () => {
 			[quantity.name]: quantity.value,
 			[category.name]: category.value,
 			stored: false,
+			timestamp: new Date().getTime(),
 		}
 
 		setProduct(prev => [...prev, newProduct])
@@ -44,7 +45,8 @@ const App = () => {
 		const selectedOpt = e.target.value
 
 		const options = {
-			recentes: () => console.log('boi'),
+			recentes: items =>
+				[...items].sort((item1, item2) => item2.timestamp - item1.timestamp),
 
 			alfabetica: items =>
 				[...items].sort((item1, item2) =>
@@ -108,7 +110,7 @@ const App = () => {
 					<form className='clear'>
 						<select name='opcoes' onChange={handleSelectChanges}>
 							<option value=''>Selecione uma opção</option>
-							<option value='ordenar'>Ordenar pelo mais recentes</option>
+							<option value='recentes'>Ordenar pelo mais recentes</option>
 							<option value='guardados'>Mostrar só itens guardados</option>
 							<option value='alfabetica'>Ordem alfabética</option>
 						</select>
