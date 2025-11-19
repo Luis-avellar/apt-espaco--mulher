@@ -46,6 +46,12 @@ const App = () => {
 		const options = {
 			recentes: () => console.log('boi'),
 
+			alfabetica: items =>
+				[...items].sort((item1, item2) =>
+					item1.category.localeCompare(item2.category, 'pt-br', {
+						sensitivity: 'base',
+					})
+				),
 			guardados: items => items.filter(item => item.stored),
 		}
 
