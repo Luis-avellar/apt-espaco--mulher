@@ -1,6 +1,8 @@
 import { FaXmark } from 'react-icons/fa6'
 import { useState } from 'react'
 
+const arrIDs = Array.from({ length: 12 }, () => crypto.randomUUID())
+
 const App = () => {
 	const [product, setProduct] = useState([])
 
@@ -51,9 +53,11 @@ const App = () => {
 						<label htmlFor='#'>
 							O que você precisa guardar?
 							<select name='quantity'>
-								<option value='1'>1</option>
-								<option value='2'>2</option>
-								<option value='3'>3</option>
+								{arrIDs.map((id, index) => (
+									<option key={id} value={index + 1}>
+										{index + 1}
+									</option>
+								))}
 							</select>
 						</label>
 						<input type='text' name='category' placeholder='Mande aqui' />
