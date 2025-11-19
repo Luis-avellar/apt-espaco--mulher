@@ -40,6 +40,18 @@ const App = () => {
 		setProduct([])
 	}
 
+	const handleSelectChanges = e => {
+		const selectedOpt = e.target.value
+
+		const options = {
+			recentes: () => console.log('boi'),
+
+			guardados: items => items.filter(item => item.stored),
+		}
+
+		setProduct(prev => options[selectedOpt](prev))
+	}
+
 	return (
 		<>
 			<nav>
@@ -88,10 +100,11 @@ const App = () => {
 				</div>
 				<div className='container-btn'>
 					<form className='clear'>
-						<select name='opcoes'>
+						<select name='opcoes' onChange={handleSelectChanges}>
+							<option value=''>Selecione uma opção</option>
 							<option value='ordenar'>Ordenar pelo mais recentes</option>
 							<option value='guardados'>Mostrar só itens guardados</option>
-							<option value='ordem'>Ordem alfabética</option>
+							<option value='alfabetica'>Ordem alfabética</option>
 						</select>
 						<button onClick={handleRemoveAllItens}>Limpar lista</button>
 					</form>
