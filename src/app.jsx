@@ -3,12 +3,15 @@ import { useState } from 'react'
 
 const App = () => {
 	const [product, setProduct] = useState([])
-	const [isChecked, setIsChecked] = useState(false)
 
 	// Manipula o estado atra´ves do InputCheckBox
-	const handleCheckboxToggle = e => {
-		setIsChecked(e.target.checked)
-	}
+	const handleCheckboxToggle = id =>
+		setProduct(prev =>
+			prev.map(item =>
+				item.id === id ? { ...item, stored: !item.stored } : item
+			)
+		)
+
 	// Atualiza o estado product com a informações obtidas no form Adicionar
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -19,6 +22,7 @@ const App = () => {
 			id: crypto.randomUUID(),
 			[quantity.name]: quantity.value,
 			[category.name]: category.value,
+			stored: false,
 		}
 
 		setProduct(prev => [...prev, newProduct])
@@ -67,10 +71,10 @@ const App = () => {
 									<input
 										type='checkbox'
 										name='first'
-										onChange={handleCheckboxToggle}
+										onChange={() => handleCheckboxToggle(product.id)}
 									/>
 									<span
-										className={isChecked ? 'line-through' : ''}
+										className={product.stored ? 'line-through' : ''}
 									>{`${product.quantity} ${product.category}`}</span>
 									<FaXmark onClick={() => handleRemoveItem(product.id)} />
 								</div>
