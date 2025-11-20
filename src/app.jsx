@@ -121,7 +121,10 @@ const App = () => {
 
 			<footer>
 				<div className='container-form'>
-					<p>Você tem 0 itens na lista</p>
+					<p>
+						Você tem {product.length} {product.length <= 1 ? 'item' : 'itens'}{' '}
+						na lista
+					</p>
 				</div>
 			</footer>
 		</>
