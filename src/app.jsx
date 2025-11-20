@@ -60,6 +60,8 @@ const App = () => {
 		setProduct(prev => options[selectedOpt](prev))
 	}
 
+	let storedItems = 0
+
 	return (
 		<>
 			<nav>
@@ -80,7 +82,12 @@ const App = () => {
 								))}
 							</select>
 						</label>
-						<input type='text' name='category' placeholder='Mande aqui' />
+						<input
+							type='text'
+							name='category'
+							placeholder='Mande aqui'
+							required
+						/>
 						<button>Adicionar</button>
 					</form>
 				</div>
@@ -122,8 +129,39 @@ const App = () => {
 			<footer>
 				<div className='container-form'>
 					<p>
-						Você tem {product.length} {product.length <= 1 ? 'item' : 'itens'}{' '}
-						na lista
+						{product.length === 0
+							? `Você tem ${product.length} item`
+							: product.reduce((_, item) => {
+									const percetageStoredItems = (
+										(storedItems / product.length) *
+										100
+									).toFixed(0)
+
+									if (item.stored) {
+										storedItems++
+										const percetageStoredItems = (
+											(storedItems / product.length) *
+											100
+										).toFixed(0)
+
+										return `Você tem ${product.length} ${
+											product.length <= 1 ? 'item' : 'itens'
+										} e já guardou ${storedItems} (${percetageStoredItems}%)`
+									}
+									if (product.length <= 1) {
+										return `Você tem ${product.length} ${
+											product.length <= 1 ? 'item' : 'itens'
+										} e já guardou ${storedItems} (${percetageStoredItems}%)`
+									}
+
+									return storedItems
+										? `Você tem ${product.length} ${
+												product.length <= 1 ? 'item' : 'itens'
+										  } e já guardou ${storedItems} (${percetageStoredItems}%)`
+										: `Você tem ${product.length} ${
+												product.length <= 1 ? 'item' : 'itens'
+										  } na lista e já guardou ${storedItems} (${percetageStoredItems}%)`
+							  }, '')}
 					</p>
 				</div>
 			</footer>
