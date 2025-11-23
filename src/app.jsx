@@ -3,6 +3,31 @@ import { useState } from 'react'
 
 const arrIDs = Array.from({ length: 12 }, () => crypto.randomUUID())
 
+const Stats = ({ product }) => {
+	const storedItems = product.reduce((acc, item) => {
+		return item.stored ? acc + 1 : acc
+	}, 0)
+	const percetageStored =
+		product.length === 0 ? 0 : ((storedItems / product.length) * 100).toFixed(0)
+
+	const singularOrPlural = product.length === 1 ? 'item' : 'items'
+
+	return (
+		<footer>
+			<div className='container-form'>
+				<p>
+					{`Você tem ${product.length} ${singularOrPlural} na lista `}
+					{product.length > 0 && (
+						<span>
+							e já guardou {storedItems} ({percetageStored}%)
+						</span>
+					)}
+				</p>
+			</div>
+		</footer>
+	)
+}
+
 const App = () => {
 	const [product, setProduct] = useState([])
 
@@ -126,45 +151,7 @@ const App = () => {
 				</div>
 			</section>
 
-			<footer>
-				<div className='container-form'>
-					<p>
-						{product.length === 0
-							? `Você tem ${product.length} item`
-							: product.reduce((_, item) => {
-									const percetageStoredItems = (
-										(storedItems / product.length) *
-										100
-									).toFixed(0)
-
-									if (item.stored) {
-										storedItems++
-										const percetageStoredItems = (
-											(storedItems / product.length) *
-											100
-										).toFixed(0)
-
-										return `Você tem ${product.length} ${
-											product.length <= 1 ? 'item' : 'itens'
-										} e já guardou ${storedItems} (${percetageStoredItems}%)`
-									}
-									if (product.length <= 1) {
-										return `Você tem ${product.length} ${
-											product.length <= 1 ? 'item' : 'itens'
-										} e já guardou ${storedItems} (${percetageStoredItems}%)`
-									}
-
-									return storedItems
-										? `Você tem ${product.length} ${
-												product.length <= 1 ? 'item' : 'itens'
-										  } e já guardou ${storedItems} (${percetageStoredItems}%)`
-										: `Você tem ${product.length} ${
-												product.length <= 1 ? 'item' : 'itens'
-										  } na lista e já guardou ${storedItems} (${percetageStoredItems}%)`
-							  }, '')}
-					</p>
-				</div>
-			</footer>
+			<Stats product={product} />
 		</>
 	)
 }
