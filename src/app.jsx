@@ -30,6 +30,7 @@ const Stats = ({ product }) => {
 
 const App = () => {
 	const [product, setProduct] = useState([])
+	const [option, setOption] = useState('recentes')
 
 	// Manipula o estado atra´ves do InputCheckBox
 	const handleCheckboxToggle = id =>
@@ -65,27 +66,12 @@ const App = () => {
 		e.preventDefault()
 		setProduct([])
 	}
-
+	// Atualiza a variavel de estado responsável pelo select
 	const handleSelectChanges = e => {
 		const selectedOpt = e.target.value
 
-		const options = {
-			recentes: items =>
-				[...items].sort((item1, item2) => item2.timestamp - item1.timestamp),
-
-			alfabetica: items =>
-				[...items].sort((item1, item2) =>
-					item1.category.localeCompare(item2.category, 'pt-br', {
-						sensitivity: 'base',
-					})
-				),
-			guardados: items => items.filter(item => item.stored),
-		}
-
-		setProduct(prev => options[selectedOpt](prev))
+		setOption(selectedOpt)
 	}
-
-	let storedItems = 0
 
 	return (
 		<>
@@ -140,8 +126,7 @@ const App = () => {
 				</div>
 				<div className='container-btn'>
 					<form className='clear'>
-						<select name='opcoes' onChange={handleSelectChanges}>
-							<option value=''>Selecione uma opção</option>
+						<select value={option} onChange={handleSelectChanges}>
 							<option value='recentes'>Ordenar pelo mais recentes</option>
 							<option value='guardados'>Mostrar só itens guardados</option>
 							<option value='alfabetica'>Ordem alfabética</option>
