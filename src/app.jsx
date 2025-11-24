@@ -105,7 +105,7 @@ const Stats = ({ product }) => {
 	)
 }
 
-const App = () => {
+const useItems = () => {
 	const [product, setProduct] = useState([])
 	const [option, setOption] = useState('recentes')
 
@@ -148,6 +148,28 @@ const App = () => {
 
 		setOption(selectedOpt)
 	}
+
+	return {
+		option,
+		product,
+		handleCheckboxToggle,
+		handleRemoveAllItens,
+		handleRemoveItem,
+		handleSelectChanges,
+		handleSubmit,
+	}
+}
+
+const App = () => {
+	const {
+		option,
+		product,
+		handleCheckboxToggle,
+		handleRemoveAllItens,
+		handleRemoveItem,
+		handleSubmit,
+		handleSelectChanges,
+	} = useItems()
 
 	return (
 		<>
