@@ -29,6 +29,27 @@ const FormAddItem = ({ onHandleSubmit }) => (
 	</div>
 )
 
+const Filters = ({ storedItems, onHandleToggle, onHandleRemove }) => (
+	<div className='container-grid'>
+		<div className='grid-item'>
+			{storedItems.map(product => {
+				return (
+					<div className='item' key={product.id}>
+						<input
+							type='checkbox'
+							name='first'
+							onChange={() => onHandleToggle(product.id)}
+						/>
+						<span
+							className={product.stored ? 'line-through' : ''}
+						>{`${product.quantity} ${product.category}`}</span>
+						<FaXmark onClick={() => onHandleRemove(product.id)} />
+					</div>
+				)
+			})}
+		</div>
+	</div>
+)
 const Stats = ({ product }) => {
 	const storedItems = product.reduce((acc, item) => {
 		return item.stored ? acc + 1 : acc
@@ -120,25 +141,11 @@ const App = () => {
 			</nav>
 
 			<section>
-				<div className='container-grid'>
-					<div className='grid-item'>
-						{storedItems.map(product => {
-							return (
-								<div className='item' key={product.id}>
-									<input
-										type='checkbox'
-										name='first'
-										onChange={() => handleCheckboxToggle(product.id)}
-									/>
-									<span
-										className={product.stored ? 'line-through' : ''}
-									>{`${product.quantity} ${product.category}`}</span>
-									<FaXmark onClick={() => handleRemoveItem(product.id)} />
-								</div>
-							)
-						})}
-					</div>
-				</div>
+				<Filters
+					storedItems={storedItems}
+					onHandleToggle={handleCheckboxToggle}
+					onHandleRemove={handleRemoveItem}
+				/>
 				<div className='container-btn'>
 					<form className='clear'>
 						<select value={option} onChange={handleSelectChanges}>
