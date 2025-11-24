@@ -73,6 +73,9 @@ const App = () => {
 		setOption(selectedOpt)
 	}
 
+	const storedItems =
+		option === 'guardados' ? product.filter(item => item.stored) : product
+
 	return (
 		<>
 			<nav>
@@ -107,7 +110,7 @@ const App = () => {
 			<section>
 				<div className='container-grid'>
 					<div className='grid-item'>
-						{product.map(product => {
+						{storedItems.map(product => {
 							return (
 								<div className='item' key={product.id}>
 									<input
