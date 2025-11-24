@@ -3,6 +3,12 @@ import { useState } from 'react'
 
 const arrIDs = Array.from({ length: 12 }, () => crypto.randomUUID())
 
+const Logo = () => (
+	<div className='container'>
+		<img src='/img/logo-espaco-mulher.png' alt='logo do apt' />
+		<h1>Espaço Mulher</h1>
+	</div>
+)
 const Stats = ({ product }) => {
 	const storedItems = product.reduce((acc, item) => {
 		return item.stored ? acc + 1 : acc
@@ -31,7 +37,7 @@ const Stats = ({ product }) => {
 const App = () => {
 	const [product, setProduct] = useState([])
 	const [option, setOption] = useState('recentes')
-	console.log(option)
+
 	// Manipula o estado atra´ves do InputCheckBox
 	const handleCheckboxToggle = id =>
 		setProduct(prev =>
@@ -51,7 +57,6 @@ const App = () => {
 			[quantity.name]: quantity.value,
 			[category.name]: category.value,
 			stored: false,
-			timestamp: new Date().getTime(),
 		}
 
 		setProduct(prev => [...prev, newProduct])
@@ -89,10 +94,7 @@ const App = () => {
 	return (
 		<>
 			<nav>
-				<div className='container'>
-					<img src='/img/logo-espaco-mulher.png' alt='logo do apt' />
-					<h1>Espaço Mulher</h1>
-				</div>
+				<Logo />
 
 				<div className='container-form'>
 					<form onSubmit={handleSubmit}>
