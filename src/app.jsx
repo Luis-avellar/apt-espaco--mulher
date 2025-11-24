@@ -31,7 +31,7 @@ const Stats = ({ product }) => {
 const App = () => {
 	const [product, setProduct] = useState([])
 	const [option, setOption] = useState('recentes')
-
+	console.log(option)
 	// Manipula o estado atra´ves do InputCheckBox
 	const handleCheckboxToggle = id =>
 		setProduct(prev =>
@@ -72,9 +72,19 @@ const App = () => {
 
 		setOption(selectedOpt)
 	}
-
+	// Manipulação do estado product baseando se no valor da variavel option
 	const storedItems =
-		option === 'guardados' ? product.filter(item => item.stored) : product
+		option === 'guardados'
+			? product.filter(item => item.stored)
+			: option === 'alfabetica'
+			? product.toSorted((item1, item2) =>
+					item1.category > item2.category
+						? 1
+						: item2.category > item1.category
+						? -1
+						: 0
+			  )
+			: product
 
 	return (
 		<>
