@@ -29,27 +29,57 @@ const FormAddItem = ({ onHandleSubmit }) => (
 	</div>
 )
 
-const Filters = ({ storedItems, onHandleToggle, onHandleRemove }) => (
-	<div className='container-grid'>
-		<div className='grid-item'>
-			{storedItems.map(product => {
-				return (
-					<div className='item' key={product.id}>
-						<input
-							type='checkbox'
-							name='first'
-							onChange={() => onHandleToggle(product.id)}
-						/>
-						<span
-							className={product.stored ? 'line-through' : ''}
-						>{`${product.quantity} ${product.category}`}</span>
-						<FaXmark onClick={() => onHandleRemove(product.id)} />
-					</div>
-				)
-			})}
+const ListOfItems = ({ product, option, onHandleToggle, onHandleRemove }) => {
+	// Manipulação do estado product baseando se no valor da variavel option
+	const storedItems =
+		option === 'guardados'
+			? product.filter(item => item.stored)
+			: option === 'alfabetica'
+			? product.toSorted((item1, item2) =>
+					item1.category > item2.category
+						? 1
+						: item2.category > item1.category
+						? -1
+						: 0
+			  )
+			: product
+
+	return (
+		<div className='container-grid'>
+			<div className='grid-item'>
+				{storedItems.map(product => {
+					return (
+						<div className='item' key={product.id}>
+							<input
+								type='checkbox'
+								name='first'
+								onChange={() => onHandleToggle(product.id)}
+							/>
+							<span
+								className={product.stored ? 'line-through' : ''}
+							>{`${product.quantity} ${product.category}`}</span>
+							<FaXmark onClick={() => onHandleRemove(product.id)} />
+						</div>
+					)
+				})}
+			</div>
 		</div>
+	)
+}
+
+const Filters = ({ option, onHandleSelect, onHandleRemoveAll }) => (
+	<div className='container-btn'>
+		<form className='clear'>
+			<select value={option} onChange={onHandleSelect}>
+				<option value='recentes'>Ordenar pelo mais recentes</option>
+				<option value='guardados'>Mostrar só itens guardados</option>
+				<option value='alfabetica'>Ordem alfabética</option>
+			</select>
+			<button onClick={onHandleRemoveAll}>Limpar lista</button>
+		</form>
 	</div>
 )
+
 const Stats = ({ product }) => {
 	const storedItems = product.reduce((acc, item) => {
 		return item.stored ? acc + 1 : acc
@@ -118,44 +148,26 @@ const App = () => {
 
 		setOption(selectedOpt)
 	}
-	// Manipulação do estado product baseando se no valor da variavel option
-	const storedItems =
-		option === 'guardados'
-			? product.filter(item => item.stored)
-			: option === 'alfabetica'
-			? product.toSorted((item1, item2) =>
-					item1.category > item2.category
-						? 1
-						: item2.category > item1.category
-						? -1
-						: 0
-			  )
-			: product
 
 	return (
 		<>
 			<nav>
 				<Logo />
-
 				<FormAddItem onHandleSubmit={handleSubmit} />
 			</nav>
 
 			<section>
-				<Filters
-					storedItems={storedItems}
+				<ListOfItems
+					product={product}
+					option={option}
 					onHandleToggle={handleCheckboxToggle}
 					onHandleRemove={handleRemoveItem}
 				/>
-				<div className='container-btn'>
-					<form className='clear'>
-						<select value={option} onChange={handleSelectChanges}>
-							<option value='recentes'>Ordenar pelo mais recentes</option>
-							<option value='guardados'>Mostrar só itens guardados</option>
-							<option value='alfabetica'>Ordem alfabética</option>
-						</select>
-						<button onClick={handleRemoveAllItens}>Limpar lista</button>
-					</form>
-				</div>
+				<Filters
+					option={option}
+					onHandleSelect={handleSelectChanges}
+					onHandleRemoveAll={handleRemoveAllItens}
+				/>
 			</section>
 
 			<Stats product={product} />
