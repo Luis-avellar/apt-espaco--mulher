@@ -9,6 +9,26 @@ const Logo = () => (
 		<h1>Espaço Mulher</h1>
 	</div>
 )
+
+const FormAddItem = ({ onHandleSubmit }) => (
+	<div className='container-form'>
+		<form onSubmit={onHandleSubmit}>
+			<label htmlFor='#'>
+				O que você precisa guardar?
+				<select name='quantity'>
+					{arrIDs.map((id, index) => (
+						<option key={id} value={index + 1}>
+							{index + 1}
+						</option>
+					))}
+				</select>
+			</label>
+			<input type='text' name='category' placeholder='Mande aqui' required />
+			<button>Adicionar</button>
+		</form>
+	</div>
+)
+
 const Stats = ({ product }) => {
 	const storedItems = product.reduce((acc, item) => {
 		return item.stored ? acc + 1 : acc
@@ -96,27 +116,7 @@ const App = () => {
 			<nav>
 				<Logo />
 
-				<div className='container-form'>
-					<form onSubmit={handleSubmit}>
-						<label htmlFor='#'>
-							O que você precisa guardar?
-							<select name='quantity'>
-								{arrIDs.map((id, index) => (
-									<option key={id} value={index + 1}>
-										{index + 1}
-									</option>
-								))}
-							</select>
-						</label>
-						<input
-							type='text'
-							name='category'
-							placeholder='Mande aqui'
-							required
-						/>
-						<button>Adicionar</button>
-					</form>
-				</div>
+				<FormAddItem onHandleSubmit={handleSubmit} />
 			</nav>
 
 			<section>
