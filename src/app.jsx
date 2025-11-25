@@ -5,7 +5,7 @@ const arrIDs = Array.from({ length: 12 }, () => crypto.randomUUID())
 
 const Logo = () => (
 	<div className='container'>
-		<img src='/img/logo-espaco-mulher.png' alt='logo do apt' />
+		<img src='/logo-espaco-mulher.png' alt='logo do apt' />
 		<h1>Espaço Mulher</h1>
 	</div>
 )
